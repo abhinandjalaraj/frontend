@@ -14,7 +14,7 @@ const Header = () => {
 
   
   return (
-    <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between  content-center'>
+    <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between  sticky top-0 z-100 w-full content-center'>
       <Icon  className='size-9 '/>
     <div className="flex items-center justify-center  bg-gray-100 rounded-2xl max-md:h-">
       <div className="flex items-center rounded-2xl  ">
