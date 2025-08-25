@@ -13,7 +13,7 @@ const Carousal = () => {
   const gallery = [
     {
       image: image1,
-      title: "rohan ",
+      title: "groceries",
       subtitle: "Buy your favorite groceries for resonable price ",
     },
     {
