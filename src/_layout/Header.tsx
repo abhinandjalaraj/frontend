@@ -11,24 +11,18 @@ import Icon from '@/app/_components/Icon';
 const Header = () => {
 
   const[menu,setmenu]=useState(false)
+
+  
   return (
-    
     <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between  content-center'>
       <Icon  className='size-9 '/>
-  
-  
-  
-    <div className="flex items-center justify-center  bg-gray-100 rounded-2xl  ">
-      <div className="flex items-center rounded-2xl bg-white ">
+    <div className="flex items-center justify-center  bg-gray-100 rounded-2xl max-md:h-">
+      <div className="flex items-center rounded-2xl  ">
         <input 
           type="text" 
           placeholder="Search..." 
-          className=" min-md:w-full  px-5 max-md:px-3 max-md:w-50% py-1 text-gray-700 rounded-l-2xl outline-none  border-0 focus:ring-blue-500"
+          className=" min-md:w-full max-md:px-2 max-md:w-50  max-md:rounded-2xl  text-gray-700 rounded-l-2xl   focus:ring-blue-500"
         />
-        <button 
-          className="px-2 py-2   hover:bg-indigo-800 bg-blue-900 text-white font-semibold rounded-r-2xl  ">
-          Search
-        </button>
       </div>
     </div>
   
@@ -47,7 +41,7 @@ const Header = () => {
       </div>
 </div>
     {menu===true &&(
-    <div className=" bg-blue-300 fixed w-1/2 h-full top-0 right-0 flex flex-col justify-center items-center gap-10 opacity-100 rounded-2xl">
+    <div className=" z-30 bg-blue-300 fixed w-1/2 h-full top-0 right-0 flex flex-col justify-center items-center gap-10 opacity-100 rounded-2xl">
      <div className='flex gap-10  '>
         
       </div> 
@@ -73,7 +67,7 @@ user
     )}
     
    <Cart className=" size-9 ml-50 top-3 max-md:block hidden  max-sm:ml-5  max-xs:ml-5  "/>
-<Hamburger onClick={()=>setmenu(true)} className="size-7  mt-1 max-md:block hidden "/>
+<Hamburger onClick={()=>setmenu(true)} className="size-7  mt-1 max-md:block hidden max-sm: "/>
 
  </div>
 

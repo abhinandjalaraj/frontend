@@ -29,11 +29,11 @@ const Catagory = () => {
   ];
 
   return (
-    <div className="capitalize pt-3 bg-gray-900">
+    <div className="capitalize pt-3  bg-gray-900">
       <h1 className="text-5xl font-bold text-white text-center p-3  ">
         Categories
       </h1>
-      <div className="grid grid-rows-2 grid-cols-3  max-md:grid-cols-1  gap-2">
+      <div className="grid grid-rows-2 grid-cols-3 max-md:p-7 min-md:gap-4 max-md:gap-10 max-md:grid-cols-1 min-md:p-7  gap-2">
         <div className=" row-span-2 col-span-1  relative   h-[400px]">
           <Image className="object-cover" src={catagory[0].image} fill alt="" />
           

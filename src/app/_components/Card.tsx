@@ -12,7 +12,7 @@ type props={
 const Card = ({image,ProductName,ProductDescription,price}:props) => {
   return (
 
-    <div className="bg-white rounded-2xl">
+    <div className="bg-white rounded-2xl ">
 
           <div className="relative rounded-3xl h-[250px]">
             <Image className="object-cover rounded-t-2xl" 
