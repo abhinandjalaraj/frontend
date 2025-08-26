@@ -14,7 +14,7 @@ const Header = () => {
 
   
   return (
-    <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between  sticky top-0 z-100 w-full content-center'>
+    <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between   w-full content-center'>
       <Icon  className='size-9 '/>
     <div className="flex items-center justify-center  bg-gray-100 rounded-2xl max-md:h-">
       <div className="flex items-center rounded-2xl  ">
@@ -32,8 +32,8 @@ const Header = () => {
 <div className='flex gap-5 justify-between  content-center text-1x9 max-md:hidden'>
       <Link href="/">Home</Link>
           <Link href="/">shop</Link>
-      <Link href="/">contact</Link>
-      <Link href="/">login</Link>
+      <Link href="/contact">contact</Link>
+      <Link href="/login">login</Link>
       
       <div className='flex gap-5'>
         <Cart className="size-7"/>
@@ -49,9 +49,9 @@ const Header = () => {
 <Link href="/">Home</Link>
       <Link href="/">shop</Link>
 
-      <Link href="/">contact</Link>
+      <Link href="/contact">contact</Link>
 
-      <Link href="/">login</Link>
+      <Link href="/login">login</Link>
 
       <div className='flex   absolute top-2 left-3 border-2 rounded-4xl p-2 '>
         <User className="size-5"/>

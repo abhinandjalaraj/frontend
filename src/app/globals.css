@@ -3,3 +3,8 @@
 @theme inline {
   --font-anton: var(--font-anton);
 }
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
