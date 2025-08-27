@@ -11,27 +11,31 @@ import z from 'zod';//form validation element
 
 const loginSchema =z.object({
   username:z.string().min(1,"please enter a username "),
-  password:z.string().min(8,"minimum 8 characters reqired ")
+  password:z.string().min(8,"minimum 8 characters reqired ")//schema used to check various conditions in a form validation
 })
 
-type TLoginSchema=z.infer<typeof loginSchema>;
+type TLoginSchema=z.infer<typeof loginSchema>;//zod automatically checks the type of the data stored in as objeects
 
 const LoginForm = () => {
+
+
   const {
     register,
     handleSubmit,
-    formState:{errors,isSubmitting}    
-  } = useForm<TLoginSchema>({
+    formState:{errors,isSubmitting}  //this is for error message,is submiting uses to disable the submit button being clicked during submission  
+  } =useForm<TLoginSchema>({
     resolver:zodResolver(loginSchema),
-  });
+  });//zod value stored as labled names like username password etc,handle submit is prdefined zod function that passes values stored in as object as parameters
 
 
 
     const [showpass, setshowpass] = useState(false);
-const submit=(value:unknown)=>{
-  console.log("data::",value)
+
+    
+const submit=(value:unknown)=>{//after the object is passed as parameters from handlesubmit==>submit fn the value:UNKNOWN MEANS THE TYPE OF VALUE PASSED IS UNKNOWN 
+  console.log("data::",value)//JUST CHECKING IF THE VALUE HAVE BEEN PASSED BY CONSOLING THE OUTPUT IN A CONSOLE
 }
-  return (
+  return (//handle submit is predefined function and the objects will be passed as parameters from handeSubmit function to submit function as parameters
     <div> <form onSubmit={handleSubmit(submit)} className="  h-90 bg-gray-900 w-120 rounded-2xl flex flex-col justify-center items-center gap-4 ">
         <div>
           <h1 className="text-4xl text-white font-anton">
@@ -67,16 +71,19 @@ const submit=(value:unknown)=>{
 
           <input
 
-          {...register("password")}
+          {...register("password")}//register will carry the value in password with name tagged "password":(THEN THE VALUE) as objects
             className="bg-white rounded-2xl w-80 h-11  text-black"
            type={showpass==true?"text":"password"}
             placeholder="password"
           />
          
         </div>
-         {errors.password&&(<p className='text-red-700 text-center'>{errors.password.message}</p>)}
+        {/* there is a condition that if ther is eerror message inside error.password ther will be a paragraph tag belloe that will show the specific error messsage for each input the error message is displayed as errors.password.message */}
+         {errors.password&&(<p className='text-red-700 text-center'>{errors.password.message}</p>)} 
         <div>
-          <button  disabled={isSubmitting}   type='submit' className="bg-white rounded-2xl font-anton text-2xl  w-80 h-11 text-black ">
+
+          {/* when submitting if submiting currently working then submit button disabled */}
+          <button  disabled={isSubmitting}    type='submit' className="bg-white rounded-2xl font-anton text-2xl  w-80 h-11 text-black ">
             Login
           </button>
         </div>
