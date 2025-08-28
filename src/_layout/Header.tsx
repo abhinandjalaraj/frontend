@@ -15,7 +15,7 @@ const Header = () => {
   
   return (
     <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between   w-full content-center'>
-      <Icon  className='size-9 '/>
+      <Icon  className='size-9  hover:animate-bounce  anim'/>
     <div className="flex items-center justify-center  bg-gray-100 rounded-2xl max-md:h-">
       <div className="flex items-center rounded-2xl  ">
         <input 
@@ -30,14 +30,14 @@ const Header = () => {
 
 
 <div className='flex gap-5 justify-between  content-center text-1x9 max-md:hidden'>
-      <Link href="/">Home</Link>
-          <Link href="/">shop</Link>
-      <Link href="/contact">contact</Link>
-      <Link href="/login">login</Link>
+      <Link className='hover:scale-120' href="/">Home</Link>
+          <Link className='hover:scale-120' href="/">shop</Link>
+      <Link className='hover:scale-120' href="/contact">contact</Link>
+      <Link className='hover:scale-120' href="/login">login</Link>
       
-      <div className='flex gap-5'>
-        <Cart className="size-7"/>
-        <User className="size-7"/>
+      <div className='flex gap-5 '>
+        <Cart  className="size-7 hover:scale-120"/>
+        <User className="size-7 hover:scale-120"/>
       </div>
 </div>
     {menu===true &&(
@@ -67,7 +67,7 @@ user
     )}
     
    <Cart className=" size-9 ml-50 top-3 max-md:block hidden  max-sm:ml-5  max-xs:ml-5  "/>
-<Hamburger onClick={()=>setmenu(true)} className="size-7  mt-1 max-md:block hidden max-sm: "/>
+<Hamburger onClick={()=>setmenu(true)} className="size-7  mt-1 max-md:block hidden hover:scale-120 duration-1000"/>
 
  </div>
 

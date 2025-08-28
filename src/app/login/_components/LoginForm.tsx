@@ -1,99 +1,167 @@
-"use client";
+"use client";  
+// ✅ Marks this as a Client Component in Next.js (needed since we use hooks like useState, useForm here).
 
-import CloseEye from '@/app/_svg/CloseEye'
-import Eye from '@/app/_svg/Eye'
-import { zodResolver } from '@hookform/resolvers/zod';
+import CloseEye from '@/app/_svg/CloseEye';  
+import Eye from '@/app/_svg/Eye';  
+// ✅ Importing custom SVG icons for showing/hiding the password field.
 
-import Link from 'next/link';
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
-import z from 'zod';//form validation element 
+import { zodResolver } from '@hookform/resolvers/zod';  
+// ✅ Connects Zod validation schema with react-hook-form.
 
-const loginSchema =z.object({
-  username:z.string().min(1,"please enter a username "),
-  password:z.string().min(8,"minimum 8 characters reqired ")//schema used to check various conditions in a form validation
-})
+import Link from 'next/link';  
+// ✅ Next.js Link component (used for navigation without reloading the page).
 
-type TLoginSchema=z.infer<typeof loginSchema>;//zod automatically checks the type of the data stored in as objeects
+import React, { useState } from 'react';  
+// ✅ Import React and the useState hook (used for password visibility toggle).
 
+import { useForm } from 'react-hook-form';  
+// ✅ Main hook from react-hook-form that manages form state, handles submission, and validation.
+
+import z from 'zod'; // form validation element  
+// ✅ Zod library used to define validation rules for inputs.
+
+
+// ====================== VALIDATION SCHEMA ======================
+const loginSchema = z.object({
+  username: z.string().min(1,"please enter a username "),
+  // Rule: Username must not be empty (at least 1 character).
+  
+  password: z.string().min(8,"minimum 8 characters reqired ")
+  // Rule: Password must be at least 8 characters long.
+  // Schema is what defines the validation logic for this form.
+});
+
+
+// ====================== TYPE INFERENCE ======================
+type TLoginSchema = z.infer<typeof loginSchema>; 
+// ✅ Infers a TypeScript type automatically from the loginSchema.
+// That means the form data will always follow the structure { username: string, password: string }.
+
+
+// ====================== LOGIN FORM COMPONENT ======================
 const LoginForm = () => {
 
-
+  // ✅ useForm hook initializes the form with Zod schema for validation
   const {
-    register,
-    handleSubmit,
-    formState:{errors,isSubmitting}  //this is for error message,is submiting uses to disable the submit button being clicked during submission  
-  } =useForm<TLoginSchema>({
-    resolver:zodResolver(loginSchema),
-  });//zod value stored as labled names like username password etc,handle submit is prdefined zod function that passes values stored in as object as parameters
+    register,           // Registers inputs to track their values
+    handleSubmit,       // Wraps submit handler and validates inputs
+    formState:{errors,isSubmitting}  
+    // errors → stores any validation errors for each input field
+    // isSubmitting → true while form is submitting (disables button to prevent double-submit)
+  } = useForm<TLoginSchema>({
+    resolver: zodResolver(loginSchema), 
+    // ✅ Links Zod schema with react-hook-form validation.
+  });
+
+  // ✅ Local state to toggle password visibility
+  const [showpass, setshowpass] = useState(false); 
+  // Default = false → password field is hidden (masked).
+  // Toggle true/false to switch between masked and visible.
+
+  
+  // ✅ Submit function called after successful validation
+  const submit = (value: unknown) => {
+    // "value" will contain form data as an object: { username: "...", password: "..." }
+    console.log("data::",value); 
+    // Just logging the submitted data to console for debugging.
+  };
 
 
+  // ====================== RETURN JSX ======================
+  return (
+    <div>
+      <form 
+        onSubmit={handleSubmit(submit)} // ✅ handleSubmit validates & passes values to submit()
+        className="h-90 bg-gray-900 w-120 rounded-2xl flex flex-col justify-center items-center gap-4 "
+      >
 
-    const [showpass, setshowpass] = useState(false);
-
-    
-const submit=(value:unknown)=>{//after the object is passed as parameters from handlesubmit==>submit fn the value:UNKNOWN MEANS THE TYPE OF VALUE PASSED IS UNKNOWN 
-  console.log("data::",value)//JUST CHECKING IF THE VALUE HAVE BEEN PASSED BY CONSOLING THE OUTPUT IN A CONSOLE
-}
-  return (//handle submit is predefined function and the objects will be passed as parameters from handeSubmit function to submit function as parameters
-    <div> <form onSubmit={handleSubmit(submit)} className="  h-90 bg-gray-900 w-120 rounded-2xl flex flex-col justify-center items-center gap-4 ">
+        {/* FORM TITLE */}
         <div>
           <h1 className="text-4xl text-white font-anton">
             LOGIN TO YOUR ACCOUNT
           </h1>
         </div>
+
+        {/* SUBTITLE */}
         <div>
           <div>
-            <h1 className=" text-center mb-5 text-1xl text-white">
+            <h1 className="text-center mb-5 text-1xl text-white">
               PLEASE ENTER YOUR DETAILS
             </h1>
           </div>
 
+          {/* USERNAME INPUT */}
           <input
-          {...register("username")}
-            className="  w-80 h-11 rounded-2xl bg-white"
+            {...register("username")} // ✅ Register this input under the name "username"
+            className="w-80 h-11 rounded-2xl bg-white"
             type="text"
             placeholder="usrename"
           />
         </div>
-                  {errors.username&&(<p className='text-red-700 m-0 p-0'>{errors.username.message}</p>)}
 
+        {/* USERNAME ERROR MESSAGE */}
+        {errors.username && (
+          <p className='text-red-700 m-0 p-0'>
+            {errors.username.message}
+          </p>
+        )}
+
+        {/* PASSWORD INPUT */}
         <div className="relative ">
-          <div onClick={()=>setshowpass(!showpass)}>
-            
-          
-
+          {/* Eye icon toggler → flips showpass state */}
+          <div onClick={() => setshowpass(!showpass)}>
             {
-              showpass==true?
-           <Eye className="size-6 absolute right-2 bottom-3" />: <CloseEye className="size-6 absolute right-2 bottom-3"/>
+              showpass == true
+                ? <Eye className="size-6 absolute right-2 bottom-3" />
+                : <CloseEye className="size-6 absolute right-2 bottom-3" />
             }
           </div>
 
           <input
+            {...register("password")} 
+            // ✅ Register this input under the name "password"
+            // Value will be stored in the form data object.
 
-          {...register("password")}//register will carry the value in password with name tagged "password":(THEN THE VALUE) as objects
-            className="bg-white rounded-2xl w-80 h-11  text-black"
-           type={showpass==true?"text":"password"}
+            className="bg-white rounded-2xl w-80 h-11 text-black"
+            type={showpass == true ? "text" : "password"} 
+            // ✅ If showpass is true → input type "text" (plain password)
+            // If false → input type "password" (masked password)
+
             placeholder="password"
           />
-         
         </div>
-        {/* there is a condition that if ther is eerror message inside error.password ther will be a paragraph tag belloe that will show the specific error messsage for each input the error message is displayed as errors.password.message */}
-         {errors.password&&(<p className='text-red-700 text-center'>{errors.password.message}</p>)} 
-        <div>
 
-          {/* when submitting if submiting currently working then submit button disabled */}
-          <button  disabled={isSubmitting}    type='submit' className="bg-white rounded-2xl font-anton text-2xl  w-80 h-11 text-black ">
+        {/* PASSWORD ERROR MESSAGE */}
+        {/* If validation fails, error message from schema shows here */}
+        {errors.password && (
+          <p className='text-red-700 text-center'>
+            {errors.password.message}
+          </p>
+        )} 
+
+        {/* SUBMIT BUTTON */}
+        <div>
+          <button  
+            disabled={isSubmitting} // ✅ disables button while form is submitting
+            type='submit' 
+            className="bg-white rounded-2xl font-anton text-2xl w-80 h-11 text-black "
+          >
             Login
           </button>
         </div>
-        <div className='flex gap-2  text-white' >
+
+        {/* LINK TO SIGNUP PAGE */}
+        <div className='flex gap-2 text-white'>
           <h1>dont have an account </h1>
-          <Link className='text-blue-800'  href="/signup ">  signup! </Link>
+          <Link className='text-blue-800' href="/signup">
+            signup!
+          </Link>
         </div>
        
-      </form></div>
+      </form>
+    </div>
   )
 }
 
-export default LoginForm
+export default LoginForm;  
+// ✅ Exports LoginForm so it can be imported and used in other pages/components.
