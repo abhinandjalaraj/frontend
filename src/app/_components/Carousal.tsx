@@ -12,19 +12,19 @@ const Carousal = () => {
   // created an array and gave images and titles to dynamically allocate
   const gallery = [
     {
-      image: image1,
-      title: "groceries",
-      subtitle: "Buy your favorite groceries for resonable price ",
+      image: image2,
+      title: "Everything in one place ",
+      subtitle: "find everything you need in one place ",
     },
     {
-      image: image2,
-      title: "Mobile Phones",
-      subtitle: "save big upto 75% off on mobile phones",
+      image: image1,
+      title: "home delivery",
+      subtitle: "delive your products at your doorstep",
     },
     {
       image: image3,
-      title: "Home Appliances ",
-      subtitle: "upto 60% off on home appliances ",
+      title: "track your order",
+      subtitle: " you can track your order through our app",
     },
   ];
 
@@ -56,14 +56,14 @@ const Carousal = () => {
       <div className="absolute z-10 w-full h-full flex items-center justify-between">
         {/* left  button  */}
         <button
-          className=" text-4xl font-bold hover:bg-blue-900 bg-blue-800 rounded-full  w-13 h-13 text-center text-white"
+          className=" text-4xl font-bold hover:bg-blue-900 bg-gray-800 rounded-full  size-15 text-center text-white"
           onClick={prevSlide}
         >
           {"<"}
         </button>
 
         <button
-          className="right-5 bottom-45  text-4xl font-bold text-white hover:bg-blue-900 bg-blue-800  w-13 h-13 text-center rounded-full"
+          className="right-5 bottom-45  text-4xl font-bold text-white hover:bg-blue-900 bg-gray-800 size-15 text-center rounded-full"
           onClick={nextSlide}
         >
           {">"}
@@ -71,7 +71,7 @@ const Carousal = () => {
         {/* right button */}
       </div>
       {/* dynamically adjusted   text  */}
-      <div className="absolute flex flex-col h-full w-full justify-center items-center text-black">
+      <div className="absolute flex flex-col h-full w-full justify-center items-center font-serif font-bold">
         <h1 className="text-5xl font-bold  ">{gallery[index].title} </h1>
         <h4 className="text-1xl font-bold pt-3 ">{gallery[index].subtitle}</h4>
         

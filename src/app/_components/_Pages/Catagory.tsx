@@ -1,8 +1,8 @@
 import React from "react";
-import Image1 from "../../../../public/catagories/mennn.webp";
-import Image2 from "../../../../public/catagories/women.jpeg";
-import Image3 from "../../../../public/catagories/kids.webp";
-import Image4 from "../../../../public/catagories/businessman-accessories-man-s-style-men-s-accessories_160204-1731.avif";
+import Image1 from "../../../../public/suits/men-shirt.jpg";
+import Image2 from "../../../../public/suits/women-catagory.jpg";
+import Image3 from "../../../../public/suits/kids-catagory.jpg";
+import Image4 from "../../../../public/suits/acessories.jpg";
 import Image from "next/image";
 
 const Catagory = () => {

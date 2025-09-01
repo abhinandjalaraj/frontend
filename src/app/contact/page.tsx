@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import image1 from "../../../public/contact/vintage-pink-telephone-composition.jpg";
-import Location from "../_components/_Pages/Location";
-import Contactlogo from "../_components/_Pages/Contactlogo";
-import Emaillogo from "../_components/_Pages/Emaillogo";
+import Location from "../_svg/Location";
+import Contactlogo from "../_svg/Contactlogo";
+import Emaillogo from "../_svg/Emaillogo";
 const page = () => {
   return (
     <div>
