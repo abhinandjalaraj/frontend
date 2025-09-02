@@ -129,6 +129,7 @@ const LoginForm = () => {
 
             placeholder="password"
           />
+          
         </div>
 
         {/* PASSWORD ERROR MESSAGE */}

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono,Anton } from "next/font/google";
 import "./globals.css";
 import Header from "@/_layout/Header";
 import Footer from "@/_layout/Footer";
+import ProviderClient from "@/provider/Provider";
 
 
 
@@ -41,9 +42,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} antialiased `}
       >  
 
-      <Header/>
-        {children}
-        <Footer/>
+ <ProviderClient>
+
+        <Header/>
+          {children}
+          <Footer/>
+</ProviderClient>
       </body>
     </html>
   );

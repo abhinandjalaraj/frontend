@@ -19,8 +19,11 @@ const Page = () => {
       email: z.string().min(4,"enter valid email"),
       adress: z.string().min(10,"enter a valid adress "),
       zipcode: z.string().min(6,"enter minimum 6 digits  "),
-      country: z.string().min(1,"choose a country/region ")
-    });
+     country: z.string()
+     .refine((value)=>value!=="","please select a country")
+     
+      
+    })
 
 type TLoginSchema = z.infer<typeof loginSchema>;
     const {
@@ -139,18 +142,28 @@ type TLoginSchema = z.infer<typeof loginSchema>;
           ) }
             </div>
             <div className="w-190">
-              <select
+              <select 
+              defaultValue=""
+
                {...register("country")}
                
                 className="h-8 shadow-black rounded-2xl   w-190 bg-white"
                
               >
-                <option value="choose region">choose region</option>
+                <option value="country" >choose country</option>
                 <option value="india">india</option>
-                <option value="india">usa</option>
-                <option value="india">canada</option>
-                <option value="india">china</option>
+                <option value="usa">usa</option>
+                <option value="canada">canada</option>
+                <option value="japan">japan</option>
               </select>
+
+              {errors.country && (
+          <p className='text-red-700 m-0 p-0'>
+            {errors.country.message}
+                </p>
+
+          ) }
+
             </div>
             <button disabled= {isSubmitting} type="submit" className="h-14 shadow-black  rounded-2xl p-3  w-190 bg-gray-950 text-white ">place order</button>
           </form>

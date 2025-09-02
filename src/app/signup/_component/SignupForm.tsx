@@ -192,7 +192,7 @@ const SignupForm = () => {
 
         {/* LOGIN LINK */}
         <div className="flex">
-          <h1 className="text-white">dont have an account?</h1>
+          <h1 className="text-white">Already have an account?</h1>
           <Link className="text-blue-800 underline" href="/login">
             login
           </Link>
