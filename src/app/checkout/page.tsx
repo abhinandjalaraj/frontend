@@ -5,7 +5,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const page = () => {
+const Page = () => {
 
 
     const loginSchema = z.object({
@@ -173,4 +173,4 @@ type TLoginSchema = z.infer<typeof loginSchema>;
   )
 }
 
-export default page;
+export default Page;

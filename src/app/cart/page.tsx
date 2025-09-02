@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import image from "../../../public/feaured01/furniture 2.jpg"
 import Delete from '../_svg/Delete'
+import Link from 'next/link';
 
 
 
@@ -96,7 +97,7 @@ const page = () => {
           <h1>item total</h1>
           <hr></hr>
           <h1>total</h1>
-          <button className='bg-gray-950 p-3 w-60 rounded-2xl text-white'>proceed to checkout </button>
+     <Link href="/checkout">    <button className='bg-gray-950 p-3 w-60 rounded-2xl text-white'>proceed to checkout </button></Link> 
       </div>
 
         </div>
