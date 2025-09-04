@@ -1,4 +1,6 @@
 "use client";  
+import Cart from '@/app/_svg/Cart';
+import Cartt from '@/app/_svg/Cartt';
 // ✅ Marks this as a Client Component in Next.js (needed since we use hooks like useState, useForm here).
 
 import CloseEye from '@/app/_svg/CloseEye';  
@@ -15,10 +17,11 @@ import React, { useState } from 'react';
 // ✅ Import React and the useState hook (used for password visibility toggle).
 
 import { useForm } from 'react-hook-form';  
-// ✅ Main hook from react-hook-form that manages form state, handles submission, and validation.
+// ✅ Main hook from react-hook-form that manages form state, handles submission, and validation.)/////
 
 import z from 'zod'; // form validation element  
 // ✅ Zod library used to define validation rules for inputs.
+////
 
 
 // ====================== VALIDATION SCHEMA ======================
@@ -63,7 +66,7 @@ const LoginForm = () => {
   const submit = (value: unknown) => {
     // "value" will contain form data as an object: { username: "...", password: "..." }
     console.log("data::",value); 
-    // Just logging the submitted data to console for debugging.
+    // Just logging the submitted data to console for debugging...
   };
 
 
@@ -93,9 +96,9 @@ const LoginForm = () => {
           {/* USERNAME INPUT */}
           <input
             {...register("username")} // ✅ Register this input under the name "username"
-            className="w-80 h-11 rounded-2xl bg-white"
+            className="w-80 h-11 rounded-2xl bg-white p-5"
             type="text"
-            placeholder="usrename"
+            placeholder="username"
           />
         </div>
 

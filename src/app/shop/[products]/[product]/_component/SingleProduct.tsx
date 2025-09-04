@@ -13,7 +13,7 @@ type Props = {
 // ✅ Use props properly
 const SingleProduct = ({ name, description, price, isAvailable, image }: Props) => {
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-12">
       {/* Product Image */}
       <div className="relative h-70 w-80">
         <Image
