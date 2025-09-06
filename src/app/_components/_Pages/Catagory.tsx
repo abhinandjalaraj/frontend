@@ -3,6 +3,8 @@ import Image1 from "../../../../public/suits/men-shirt.jpg";
 import Image2 from "../../../../public/suits/women-catagory.jpg";
 import Image3 from "../../../../public/suits/kids-catagory.jpg";
 import Image4 from "../../../../public/suits/acessories.jpg";
+import Image5 from "../../../../public/suits/acessories.jpg";
+
 import Image from "next/image";
 
 const Catagory = () => {
@@ -25,7 +27,7 @@ const Catagory = () => {
     {
       image: Image4,
       cat: "catagory",
-    },
+    }
   ];
 
   return (
@@ -55,10 +57,11 @@ const Catagory = () => {
         </div>
         <div className="  relative row-span-1 col-span-1  h-auto max-md:h-[400px]">
           {" "}
-          <Image className="object-cover" src={catagory[3].image} alt="" fill />
+          <Image className="object-cover"  src={catagory[3].image} alt="" fill />
                       <h1 className="text-2xl font-black  absolute bottom-0 left-0   bg-white ">ACCESORIES</h1>
 
         </div>
+         
       </div>
     </div>
   );

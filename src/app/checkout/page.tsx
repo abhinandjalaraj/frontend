@@ -19,8 +19,8 @@ const Page = () => {
       email: z.string().min(4,"enter valid email"),
       adress: z.string().min(10,"enter a valid adress "),
       zipcode: z.string().min(6,"enter minimum 6 digits  "),
-     country: z.string()
-     .refine((value)=>value!=="","please select a country")
+     country: z
+     .refine((value)=>value!=="country","please select a country")
      
       
     })
@@ -43,16 +43,17 @@ type TLoginSchema = z.infer<typeof loginSchema>;
      
      
   return (
-    <div className=" grid grid-cols-3 ">
-      <div className=" col-span-2 p-5 bg-blue-100">
-        <h1 className="text-3xl p-3  font-bold">checkout</h1>
-        <div className="grid grid-cols-3 capitalize  ">
-          <form onSubmit={handleSubmit(data)} className="col-span-2 w-190  flex flex-col gap-8">
-            <div className="flex gap-3 w-190 ">
+    <div className=" p-5 ">
+       <h1 className="text-3xl  font-bold">checkout</h1>
+      <div className=" grid grid-cols-3 gap-6">
+       
+        
+          <form onSubmit={handleSubmit(data)} className="col-span-2  flex flex-col gap-4">
+            <div className="flex gap-2 ">
               <input
               {...register("firstname")}
               
-                className="h-8 shadow-black  w-95 rounded-2xl p-3  bg-white"
+                className=" shadow-xs/50 w-full rounded-2xl h-12 p-2"
                 type="text"
                 placeholder="first name"
               />{" "}
@@ -64,7 +65,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             )}
               <input
                {...register("lastname")}
-                className=" h-8 shadow-2xl  rounded-2xl p-3 w-95 bg-white"
+                className="shadow-xs/50  w-full rounded-2xl p-3 h-12"
                 type="text"
                 placeholder="last name"
               />
@@ -85,7 +86,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             <div className="w-190">
               <input
                {...register("phnumber")}
-                className="h-8 shadow-black rounded-2xl p-3  w-190 bg-white"
+                className=" shadow-xs/50 w-full rounded-2xl p-3"
                 type="text"
                 placeholder="phone number "
               />
@@ -101,7 +102,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
               <input
               type="email"
                {...register("email")}
-                className="h-8 shadow-black rounded-2xl p-3  w-190 bg-white"
+                className="shadow-xs/50 w-full rounded-2xl p-3"
                
                 placeholder="email adress"
               />
@@ -116,7 +117,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             <div className="w-190">
               <input
                {...register("adress")}
-                className="h-8 shadow-black rounded-2xl p-3  w-190 bg-white"
+                className=" shadow-xs/50 w-full rounded-2xl p-3"
                 type="text"
                 placeholder="adress"
               />
@@ -130,7 +131,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             <div className="w-190">
               <input
                {...register("zipcode")}
-                className="h-8 shadow-black rounded-2xl p-3 w-190 bg-white"
+                className="shadow-xs/50 w-full rounded-2xl p-3"
                 type="text"
                 placeholder="zip code"
               />
@@ -143,14 +144,14 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             </div>
             <div className="w-190">
               <select 
-              defaultValue=""
+              defaultValue="country"
 
                {...register("country")}
                
-                className="h-8 shadow-black rounded-2xl   w-190 bg-white"
+                className=" shadow-xs/50 w-full rounded-2xl p-3 "
                
               >
-                <option value="country" >choose country</option>
+                <option  value="country" >choose country</option>
                 <option value="india">india</option>
                 <option value="usa">usa</option>
                 <option value="canada">canada</option>
@@ -167,21 +168,26 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             </div>
             <button disabled= {isSubmitting} type="submit" className="h-14 shadow-black  rounded-2xl p-3  w-190 bg-gray-950 text-white ">place order</button>
           </form>
-          
-  
-        </div>
-      </div>
-             <div className="col-span-1 h-full">
- <div className=' h-full  col-span-1  flex flex-col gap-7  shadow-2xl justify-center p-8  '>
-          <h1 className='text-4xl'>Cart total</h1>
-          <h1>item total</h1>
+           <div className="  col-span-1  flex flex-col gap-5  shadow-2xl   p-5  ">
+
+          <h1 className='text-3xl font-bold '>order summary</h1>
           <hr></hr>
-          <div className="flex gap-3"><h1>total :</h1><h1>$399</h1></div>
-          <button className='bg-gray-950 p-3 w-85  rounded-2xl  text-white'>proceed to checkout </button>
+         <div className="flex flex-col   ">
+            <div className="flex justify-between "><h1>item total</h1> <h1>$00.00</h1></div>
+            <div className="flex  justify-between"><h1>shippping</h1><h1>$00.00</h1></div>
+         </div>
+         <hr></hr>
+         <div className="flex justify-between"><h1>total</h1><h1>$00.00</h1></div>
       </div>
 
         </div>
-    </div>
+  
+        </div>
+
+                    
+      
+
+
     
   )
 }

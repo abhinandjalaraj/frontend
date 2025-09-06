@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import image1 from "../../..//public/catagories/12.png";
-import image2 from "../../..//public/catagories/111 (1).png";
-import image3 from "../../..//public/catagories/carousal2.jpg";
+import image1 from "../../..//public/catagories/girl-posing-with-shopping-bags.jpg";
+import image2 from "../../..//public/catagories/happy-modern-asian-woman-going-shopping-malls-holding-bags-with-clothes-smiling-wearing-sungl.jpg";
+import image3 from "../../..//public/catagories/menn.jpg";
 import Image from "next/image";
 
 const Carousal = () => {
@@ -56,14 +56,14 @@ const Carousal = () => {
       <div className="absolute z-10 w-full h-full flex items-center justify-between">
         {/* left  button  */}
         <button
-          className=" text-4xl font-bold hover:bg-blue-900 bg-gray-800 rounded-full  size-15 text-center text-white"
+          className=" text-7xl font-extrabold font-anton size-15 text-center text-white"
           onClick={prevSlide}
         >
           {"<"}
         </button>
 
         <button
-          className="right-5 bottom-45  text-4xl font-bold text-white hover:bg-blue-900 bg-gray-800 size-15 text-center rounded-full"
+          className="right-5 bottom-45   font-extrabold font-anton text-7xl  text-white size-15 text-center "
           onClick={nextSlide}
         >
           {">"}

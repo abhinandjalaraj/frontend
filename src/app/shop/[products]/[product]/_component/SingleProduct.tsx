@@ -13,19 +13,19 @@ type Props = {
 // ✅ Use props properly
 const SingleProduct = ({ name, description, price, isAvailable, image }: Props) => {
   return (
-    <div className="flex gap-12">
+    <div className="grid p-10 w-270 shadow-xl/25 h-110 grid-cols-3 justify-center items-center  max-md:grid-cols-1  max-sm:p-3 bg-white">
       {/* Product Image */}
-      <div className="relative h-70 w-80">
+      <div className="relative h-70 w-70 col-span-1 shadow-xl/40  rounded-2xl ">
         <Image
           alt="product"
           src={image}
-          className="object-cover rounded-2xl overflow-hidden"
+          className="object-cover rounded-2xl "
           fill
         />
       </div>
 
       {/* Product Details */}
-      <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col col-span-2 p-5 gap-3 ">
         <h2 className="text-3xl font-bold">{name}</h2>
 
         <p className="text-gray-700">Address</p>
