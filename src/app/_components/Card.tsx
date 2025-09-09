@@ -12,9 +12,9 @@ type props = {
 
 const Card = ({ image, ProductName, ProductDescription, price }: props) => {
   return (
-    <Link href={`shop/${ProductName}`} className="bg-white rounded-2xl ">
-      <div className="relative rounded-3xl h-[250px]">
-        <Image className="object-cover rounded-t-2xl" src={image} fill alt="" />
+    <Link href={`shop/${ProductName}`} className="bg-white  ">
+      <div className="relative  h-[250px]">
+        <Image className="object-cover " src={image} fill alt="" />
       </div>
       <div className=" font-extrabold p-4">
         <h1 className="">{ProductName}</h1>

@@ -1,9 +1,9 @@
 "use client";
 import Image from 'next/image'
-import React, { useState } from 'react'
 import image from "../../../public/feaured01/furniture 2.jpg"
 import Delete from '../_svg/Delete'
 import Link from 'next/link';
+import { useCart } from 'react-use-cart';
 
 
 
@@ -11,20 +11,38 @@ import Link from 'next/link';
 
 
 
-const page = () => {
+const Page = () => {
+  const {items,removeItem,isEmpty,updateItemQuantity}=useCart()
+  console.log(items)
+  
 
- const arr=[
-        {
-            product: "Ventillated seats",
-            image: "seat comfort",
-            price: 400,
-            quantity:2 ,
-            subtotal: 1,
-          }
+
+
+//  const arr=[
+//         {
+//             product: "Ventillated seats",
+//             image: "seat comfort",
+//             price: 400,
+//             quantity:2 ,
+//             subtotal: 1,
+//           },
+//           {
+//             product: "Ventillated seats",
+//             image: "seat comfort",
+//             price: 400,
+//             quantity:2 ,
+//             subtotal: 1,
+//           },
+//           {
+//             product: "Ventillated seats",
+//             image: "seat comfort",
+//             price: 400,
+//             quantity:2 ,
+//             subtotal: 1,
+//           }
           
-    ]
+//     ]
     
-
 
 
   return (
@@ -33,9 +51,11 @@ const page = () => {
   <div className='min-h-screen p-3'>
     <div className='  grid grid-cols-4 gap-2'>
       <div className='col-span-3 flex flex-col gap-2 p-3 shadow-xl/30 h-screen  bg-white  '>
-            <div className='flex justify-between '><h1 className='text-4xl shadow-2xl font-bold'>shopping cart</h1><h1>{arr.length}items</h1></div>
+            <div className='flex justify-between '><h1 className='text-4xl shadow-2xl font-bold'>shopping cart</h1><h1>{items.length}items</h1></div>
   <hr></hr>
-         
+           
+          
+
             <table className='   border-separate border-spacing-y-2'>
       
            <thead>
@@ -53,7 +73,11 @@ const page = () => {
               
             </tr>
             </thead>
-            <tbody className='border-separate' >
+
+          
+         {items.map((item,index)=>(
+          
+          <tbody key={index} className='border-separate' >
              
                  <tr >
                 <td>
@@ -65,23 +89,25 @@ const page = () => {
            </td>
         
             <td>
-            129.09
+                       {item.price}
+
            </td>
          <td>
               <div className='flex gap-3   items-center'>
-                   <button   className='text-2xl font-bold'>-</button>
+                   <button  onClick={() => updateItemQuantity(item.id, (item.quantity ?? 0) - 1)}  className='text-2xl font-bold'>-</button>
                     
-                  <div className='size-6 border-1  text-center'> <h1>1</h1> </div>
+                  <div className='size-6 border-1  text-center'> <h1>{item.quantity}</h1> </div>
                   
-                   <button  className=' font-bold text-2xl'>+</button>
+                   <button  onClick={() => updateItemQuantity(item.id, (item.quantity ?? 0) + 1)} className=' font-bold text-2xl'>+</button>
               </div>
          </td>
             <td>
-            928.22
+                       {item.itemTotal}
+
            </td>
            
            <td>
-            <Delete className='size-7'/>
+            <Delete onClick={()=>removeItem(item.id)} className='size-7'/>
            </td>
        
   
@@ -89,6 +115,10 @@ const page = () => {
              
              
             </tbody>
+            
+        
+      ))}
+            
             </table>
       </div>
   
@@ -111,4 +141,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -6,11 +6,13 @@ import User from '@/app/_svg/User'
 import Hamburger from '@/app/_svg/Hamburger'
 import Close from '@/app/_svg/Close'
 import Icon from '@/app/_svg/Icon';
+import { useCart } from 'react-use-cart';
 
 
 const Header = () => {
 
   const[menu,setmenu]=useState(false)
+  const {items}=useCart()
 
   
   return (
@@ -36,8 +38,8 @@ const Header = () => {
       <Link className='scale-120' href="/login">login</Link>
       
       <div className='flex gap-5 relative '>
-       <Link href="/cart"> <Cart   className="size-6 scale-120 "/></Link>
-        <div className='size-6  absolute -top-4 -right-3 rounded-full text-center bg-white text-black '>0</div>
+       <Link href="/cart"> <Cart className="size-6 scale-120 "/> </Link> 
+        <div className='size-6  absolute -top-4 -right-3 rounded-full text-center bg-white text-black '>{items.length}</div>
          </div>
         <div> <User className="size-6 scale-120"/></div>
      
@@ -63,7 +65,7 @@ const Header = () => {
       </div>
       <div className="text-white absolute  left-15 top-0">
 
-        </div>
+        </div>  
       </div>
       
     )}

@@ -43,17 +43,17 @@ type TLoginSchema = z.infer<typeof loginSchema>;
      
      
   return (
-    <div className=" p-5 ">
+    <div className=" p-3 ">
        <h1 className="text-3xl  font-bold">checkout</h1>
       <div className=" grid grid-cols-3 gap-6">
        
         
-          <form onSubmit={handleSubmit(data)} className="col-span-2  flex flex-col gap-4">
+          <form onSubmit={handleSubmit(data)} className="col-span-2  flex flex-col gap-3">
             <div className="flex gap-2 ">
               <input
               {...register("firstname")}
               
-                className=" shadow-xs/50 w-full rounded-2xl h-12 p-2"
+                className=" shadow-xs/50 w-115 rounded-2xl  p-2"
                 type="text"
                 placeholder="first name"
               />{" "}
@@ -65,7 +65,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             )}
               <input
                {...register("lastname")}
-                className="shadow-xs/50  w-full rounded-2xl p-3 h-12"
+                className="shadow-xs/50 w-70  rounded-2xl p-3 "
                 type="text"
                 placeholder="last name"
               />
@@ -86,7 +86,7 @@ type TLoginSchema = z.infer<typeof loginSchema>;
             <div className="w-190">
               <input
                {...register("phnumber")}
-                className=" shadow-xs/50 w-full rounded-2xl p-3"
+                className=" shadow-xs/50 w-185 rounded-2xl  p-2"
                 type="text"
                 placeholder="phone number "
               />
