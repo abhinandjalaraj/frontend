@@ -5,8 +5,6 @@ import Link from 'next/link';
 type props={
 image:string|StaticImageData;
 name:string;
-
-
 }
 
 const Shop = ({image,name}:props) => {

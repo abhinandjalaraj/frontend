@@ -1,48 +1,31 @@
 "use client";
 import Image from 'next/image'
-import image from "../../../public/feaured01/furniture 2.jpg"
 import Delete from '../_svg/Delete'
 import Link from 'next/link';
 import { useCart } from 'react-use-cart';
-
-
-
-
-
-
+import { useEffect, useState } from 'react';
+import image1 from "../../../public/Images/confusing-woman-due-to-empty-cart-4558760-3780056.webp"
 
 const Page = () => {
-  const {items,removeItem,isEmpty,updateItemQuantity}=useCart()
-  console.log(items)
+  
+  
+  const {items,removeItem,isEmpty,cartTotal,updateItemQuantity}=useCart()
   
 
 
 
-//  const arr=[
-//         {
-//             product: "Ventillated seats",
-//             image: "seat comfort",
-//             price: 400,
-//             quantity:2 ,
-//             subtotal: 1,
-//           },
-//           {
-//             product: "Ventillated seats",
-//             image: "seat comfort",
-//             price: 400,
-//             quantity:2 ,
-//             subtotal: 1,
-//           },
-//           {
-//             product: "Ventillated seats",
-//             image: "seat comfort",
-//             price: 400,
-//             quantity:2 ,
-//             subtotal: 1,
-//           }
-          
-//     ]
-    
+const [isClient,setIsClient] =useState(false);
+
+useEffect(()=>{
+  setIsClient(true);
+},[]);
+
+if(!isClient){
+  return null;
+}
+
+
+     if(isEmpty) return<div className='relative w-full h-full' > <div className=''><Image  fill className=' absolute object-cover' src={image1} alt=''/></div></div>;
 
 
   return (
@@ -81,11 +64,11 @@ const Page = () => {
              
                  <tr >
                 <td>
-               <div className='relative  size-20'> <Image fill className='absolute object-cover' src={image} alt='' /></div>
+               <div className='relative  size-20'> <Image fill className='absolute object-cover' src={item.image} alt='' /></div>
                 </td>
         
                  <td>
-            wardrobe
+           { item.name}
            </td>
         
             <td>
@@ -123,11 +106,11 @@ const Page = () => {
       </div>
   
           <div className="col-span-1 h-80 shadow-xl/20 mt-5">
-   <div className=' h-80   flex flex-col gap-7 justify-center p-5 '>
-            <h1 className='text-3xl'>Cart total</h1>
-            <h1>item total</h1>
+   <div className=' h-80   flex flex-col gap-5 justify-center p-3 '>
+            <h1 className='text-3xl'>Cart Total</h1>
+            <h1 className='font-bold '>subtotal:<span className='p-1 font-medium'> {cartTotal}</span></h1>
             <hr></hr>
-            <h1>total</h1>
+            <h1 className='font-bold'>total:<span className='p-1 font-medium'> {cartTotal}</span></h1>
        <Link href="/checkout">    <button className='bg-gray-950 p-3 w-60 rounded-2xl text-white'>proceed to checkout </button></Link> 
         </div>
   

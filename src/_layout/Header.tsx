@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Cart from '@/app/_svg/Cart'
 import User from '@/app/_svg/User'
@@ -14,7 +14,15 @@ const Header = () => {
   const[menu,setmenu]=useState(false)
   const {items}=useCart()
 
+  const [isClient,setIsClient] =useState(false);
   
+  useEffect(()=>{
+    setIsClient(true);
+  },[]);
+  
+  if(!isClient){
+    return null;
+  }
   return (
     <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between   w-full content-center'>
       <Icon  className='size-9  hover:animate-bounce '/>

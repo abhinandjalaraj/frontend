@@ -1,80 +1,45 @@
 import Card from "@/app/_components/Card";
 import React from "react";
-import feature1 from "../../../../public/suits/black suit.jpg";
-import feature2 from "../../../../public/suits/blue.jpg";
-import feature3 from "../../../../public/suits/brown.jpg";
-import feature4 from "../../../../public/suits/grey2.jpg";
 
-const page = () => {
-  const suits = [
-    {
-      name: "black",
-      price: 9420,
-      image: feature1,
-    },
-    {
-      name: "blue",
-      price: 9442,
-      image: feature2,
-    },
-    {
-      name: "black",
-      price: 9420,
-      image: feature1,
-    }
-    ,
+import { StaticImageData } from "next/image";
+
+const page = async({params}:{params:{products:string }}) => {
+console.log(params)
   
-    
-    {
-      name:"blue",
-      image:feature2,
-      price:4655
-    },
-    {
-       name: "grey",
-     
-      price: 4200,
-      image: feature4,
-    },
-    {
-      name: "black",
-      price: 9420,
-      image: feature1,
-    },
-    {
-      name: "brown",
-      price: 4552,
-      image: feature3,
-    },
-    {
-       name: "grey",
-     
-      price: 4200,
-      image: feature4,
-    }
-  
-  ];
+const res = await fetch(`https://dummyjson.com/products/category/${params.products}`)
+const response = await res.json()
+console.log("reepee",{response});
+const allProducts=response.products;
+
+
+
 
   return (
 
     <div >
-        <h1 className="text-7xl text-center font-serif  mt-7 ">suits</h1>
-        <p className="p-5  font-anton text-2xl">{suits.length} Products</p>
+        <h1 className="text-7xl text-center font-serif  mt-7 "></h1>
+        <p className="p-5  font-anton text-2xl">{allProducts.length} Products</p>
         <div className="grid grid-cols-4 p-5  gap-5 max-lg:grid-cols-3 max-md:grid-cols-2">
-          {suits.map((item, index) => (
-            <Card
+          
+          {allProducts.map((item: { thumbnail: StaticImageData; id:string ;title: string; description: string; price: number; },index: React.Key | null | undefined) => (
+           
+           
+           <Card
+        id={item.id}
         key={index}
-        image={item.image}
-         ProductName={item.name}
-         ProductDescription={""}
+        image={item.thumbnail}
+         ProductName={item.title}
+         ProductDescription={item.description}
          price={item.price}
-
+        
         
         />
+      
           ))}
         </div>
     </div>
   );
+  
 };
 
 export default page;

@@ -1,32 +1,23 @@
 import React from "react";
-import featured from "../../../../../public/feaured01/furniture 2.jpg"; // ✅ check folder spelling
 import SingleProduct from "./_component/SingleProduct";
 
-const products =
-  {
+const Page = async ({ params }: { params: { product: string } }) => {
+  const res = await fetch(`https://dummyjson.com/products/${params.product}`);
+  const product = await res.json();
 
-    id:"1",
-    name: "Ventillated seats",
-    description: "seat comfort",
-    price: 7899,
-    image: featured,
-    isAvailable: false,
-  }
+  console.log("product::", product);
 
-
-const Page = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen  min-md:p-10">
-        <SingleProduct
-          name={products.name}
-          description={products.description}
-          price={products.price}
-          image={products.image}
-          isAvailable={products.isAvailable}
-          id={products.id}
-        />
-      </div>
-   
+    <div className="min-h-screen p-20">
+      <SingleProduct
+        id={String(product.id)}
+        name={product.title}
+        description={product.description}
+        price={product.price}
+        image={product.thumbnail || product.images?.[0]}
+        isAvailable={product.stock > 0}
+      />
+    </div>
   );
 };
 
