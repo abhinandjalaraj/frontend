@@ -58,7 +58,7 @@ const Header = () => {
         
       </div> 
       <Close onClick={()=>setmenu(false)}  className='size-7 absolute top-3 right-3'/>
-<Link href="/">Home</Link>
+      <Link href="/">Home</Link>
       <Link href="/shop">shop</Link>
 
       <Link href="/contact">contact</Link>

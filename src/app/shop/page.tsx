@@ -6,17 +6,16 @@ import image2 from"../../../public/suits/men-shirt.jpg"
 
 import Shop from './Shop'
 
-//this is component page of shop contain shop by catagory
+//this is component page of shop contain shop by catagory///
+//ppppppppppppppppppppppppppppppppppppppppppppppppppppppp///
+
+
 const page = async() => {
+  
  
 const res = await fetch('https://dummyjson.com/products/category-list')
 const response = await res.json()
-console.log(response);
-
-
-
-
-
+console.log(response)
   return (
     <div className=' bg-white-900 p-10 '>
              <h1 className='text-center text-6xl  text-black font-anton'>CATEGORIES</h1>

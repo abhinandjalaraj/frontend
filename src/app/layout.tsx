@@ -8,6 +8,7 @@ import ProviderClient from "@/provider/Provider";
 
 
 const geistSans = Geist({
+
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });

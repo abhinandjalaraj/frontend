@@ -16,6 +16,7 @@ const Page = async ({ params }: { params: { product: string } }) => {
         price={product.price}
         image={product.thumbnail || product.images?.[0]}
         isAvailable={product.stock > 0}
+        
       />
     </div>
   );
