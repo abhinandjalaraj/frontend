@@ -1,195 +1,179 @@
-"use client"
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useCart } from "react-use-cart";
 import z from "zod";
 
 const Page = () => {
+  const { cartTotal, items } = useCart();
 
+  const loginSchema = z.object({
+    firstname: z.string().min(2, "Please enter first name"),
+    lastname: z.string().min(1, "Enter last name"),
+    phnumber: z.string().min(10, "Enter minimum 10 numbers"),
+    email: z.string().email("Enter valid email"),
+    adress: z.string().min(10, "Enter a valid address"),
+    zipcode: z.string().min(6, "Enter minimum 6 digits"),
+    country: z.refine((value) => value !== "country", "Please select a country"),
+  });
 
-    const loginSchema = z.object({
-      firstname: z.string().min(6,"please enter firstname "),
-      // Rule: Username must not be empty (at least 1 character).
-      
-     lastname: z.string().min(1,"enter last name "),
-      // Rule: Password must be at least 8 characters long.
-      // Schema is what defines the validation logic for this form.
-      phnumber: z.string().min(10,"enter minimun 10  numbers "),
-      email: z.string().min(4,"enter valid email"),
-      adress: z.string().min(10,"enter a valid adress "),
-      zipcode: z.string().min(6,"enter minimum 6 digits  "),
-     country: z
-     .refine((value)=>value!=="country","please select a country")
-     
-      
-    })
+  type TLoginSchema = z.infer<typeof loginSchema>;
 
-type TLoginSchema = z.infer<typeof loginSchema>;
-    const {
-        register,           // Registers inputs to track their values
-        handleSubmit,       // Wraps submit handler and validates inputs
-        formState:{errors,isSubmitting}  
-        // errors → stores any validation errors for each input field
-        // isSubmitting → true while form is submitting (disables button to prevent double-submit)
-      } = useForm<TLoginSchema>({resolver:zodResolver(loginSchema)})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TLoginSchema>({ resolver: zodResolver(loginSchema) });
 
-    
-    const data=(value:unknown)=>{
-        console.log(value)
+  const data = (value: unknown) => {
+    toast.success("order placed")
+  };
 
-
-    }
-     
-     
   return (
-    <div className=" p-3 ">
-       <h1 className="text-3xl  font-bold">checkout</h1>
-      <div className=" grid grid-cols-3 gap-6">
-       
-        
-          <form onSubmit={handleSubmit(data)} className="col-span-2  flex flex-col gap-3">
-            <div className="flex gap-2 ">
-              <input
-              {...register("firstname")}
-              
-                className=" shadow-xs/50 w-115 rounded-2xl  p-2"
-                type="text"
-                placeholder="first name"
-              />{" "}
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold mb-8 text-center md:text-left">
+        Checkout
+      </h1>
 
- {errors.firstname && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.firstname.message}
-          </p>
-            )}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* --- Form Section --- */}
+        <form
+          onSubmit={handleSubmit(data)}
+          className="col-span-2 flex flex-col gap-4 bg-white p-6 rounded-2xl shadow-md"
+        >
+          {/* Firstname / Lastname */}
+          <div className="flex flex-col md:flex-row gap-3">
+            <div className="flex-1">
               <input
-               {...register("lastname")}
-                className="shadow-xs/50 w-70  rounded-2xl p-3 "
+                {...register("firstname")}
+                className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
                 type="text"
-                placeholder="last name"
+                placeholder="First name"
               />
-  {errors.lastname && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.lastname.message}
-                </p>
-
-          ) }
-
+              {errors.firstname && (
+                <p className="text-red-600 text-sm mt-1">{errors.firstname.message}</p>
+              )}
             </div>
-           
 
-         
-
-        
-
-            <div className="w-190">
+            <div className="flex-1">
               <input
-               {...register("phnumber")}
-                className=" shadow-xs/50 w-185 rounded-2xl  p-2"
+                {...register("lastname")}
+                className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
                 type="text"
-                placeholder="phone number "
+                placeholder="Last name"
               />
-             
+              {errors.lastname && (
+                <p className="text-red-600 text-sm mt-1">{errors.lastname.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Phone */}
+          <div>
+            <input
+              {...register("phnumber")}
+              className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
+              type="text"
+              placeholder="Phone number"
+            />
             {errors.phnumber && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.phnumber.message}
-                </p>
+              <p className="text-red-600 text-sm mt-1">{errors.phnumber.message}</p>
+            )}
+          </div>
 
-          ) }
-            </div>
-            <div className="w-190">
-              <input
+          {/* Email */}
+          <div>
+            <input
+              {...register("email")}
+              className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
               type="email"
-               {...register("email")}
-                className="shadow-xs/50 w-full rounded-2xl p-3"
-               
-                placeholder="email adress"
-              />
-              {errors.email && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.email.message}
-                </p>
+              placeholder="Email address"
+            />
+            {errors.email && (
+              <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
 
-          ) }
-              
-            </div>
-            <div className="w-190">
-              <input
-               {...register("adress")}
-                className=" shadow-xs/50 w-full rounded-2xl p-3"
-                type="text"
-                placeholder="adress"
-              />
-              {errors.adress && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.adress.message}
-                </p>
+          {/* Address */}
+          <div>
+            <input
+              {...register("adress")}
+              className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
+              type="text"
+              placeholder="Address"
+            />
+            {errors.adress && (
+              <p className="text-red-600 text-sm mt-1">{errors.adress.message}</p>
+            )}
+          </div>
 
-          ) }
-            </div>
-            <div className="w-190">
-              <input
-               {...register("zipcode")}
-                className="shadow-xs/50 w-full rounded-2xl p-3"
-                type="text"
-                placeholder="zip code"
-              />
-              {errors.zipcode && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.zipcode.message}
-                </p>
+          {/* Zip Code */}
+          <div>
+            <input
+              {...register("zipcode")}
+              className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
+              type="text"
+              placeholder="Zip code"
+            />
+            {errors.zipcode && (
+              <p className="text-red-600 text-sm mt-1">{errors.zipcode.message}</p>
+            )}
+          </div>
 
-          ) }
-            </div>
-            <div className="w-190">
-              <select 
+          {/* Country */}
+          <div>
+            <select
               defaultValue="country"
+              {...register("country")}
+              className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
+            >
+              <option value="country">Choose country</option>
+              <option value="india">India</option>
+              <option value="usa">USA</option>
+              <option value="canada">Canada</option>
+              <option value="japan">Japan</option>
+            </select>
+            {errors.country && (
+              <p className="text-red-600 text-sm mt-1">{errors.country.message}</p>
+            )}
+          </div>
 
-               {...register("country")}
-               
-                className=" shadow-xs/50 w-full rounded-2xl p-3 "
-               
-              >
-                <option  value="country" >choose country</option>
-                <option value="india">india</option>
-                <option value="usa">usa</option>
-                <option value="canada">canada</option>
-                <option value="japan">japan</option>
-              </select>
+          {/* Submit */}
+          <button
+            disabled={isSubmitting}
+            type="submit"
+            className="w-full h-14 rounded-2xl bg-gray-900 text-white text-lg font-medium hover:bg-gray-800 transition-all"
+          >
+            {isSubmitting ? "Processing..." : "Place Order"}
+          </button>
+        </form>
 
-              {errors.country && (
-          <p className='text-red-700 m-0 p-0'>
-            {errors.country.message}
-                </p>
-
-          ) }
-
+        {/* --- Summary Section --- */}
+        <div className="col-span-1 flex flex-col gap-5 bg-white p-6 rounded-2xl shadow-md">
+          <h1 className="text-2xl font-bold">Order Summary</h1>
+          <hr />
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between">
+              <span>Total</span>
+              <span>${cartTotal}</span>
             </div>
-            <button disabled= {isSubmitting} type="submit" className="h-14 shadow-black  rounded-2xl p-3  w-190 bg-gray-950 text-white ">place order</button>
-          </form>
-           <div className="  col-span-1  flex flex-col gap-5  shadow-2xl   p-5  ">
-
-          <h1 className='text-3xl font-bold '>order summary</h1>
-          <hr></hr>
-         <div className="flex flex-col   ">
-            <div className="flex justify-between "><h1>item total</h1> <h1>$00.00</h1></div>
-            <div className="flex  justify-between"><h1>shippping</h1><h1>$00.00</h1></div>
-         </div>
-         <hr></hr>
-         <div className="flex justify-between"><h1>total</h1><h1>$00.00</h1></div>
+            <div className="flex justify-between">
+              <span>Shipping</span>
+              <span>$0.00</span>
+            </div>
+          </div>
+          <hr />
+          <div className="flex justify-between font-semibold text-lg">
+            <span>Cart Total</span>
+            <span>${cartTotal}</span>
+          </div>
+        </div>
       </div>
-
-        </div>
-  
-        </div>
-
-                    
-      
-
-
-    
-  )
-}
+    </div>
+  );
+};
 
 export default Page;

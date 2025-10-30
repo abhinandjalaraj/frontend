@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/_layout/Header";
 import Footer from "@/_layout/Footer";
 import ProviderClient from "@/provider/Provider";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -44,7 +45,8 @@ export default function RootLayout({
       >  
 
  <ProviderClient>
-
+<Toaster/> 
+{/* before calling toast function it should be added in layot */}
         <Header/>
           {children}
           <Footer/>

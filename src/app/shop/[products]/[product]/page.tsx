@@ -1,21 +1,26 @@
 import React from "react";
 import SingleProduct from "./_component/SingleProduct";
+import { frontendApi } from "@/Api/FrontendApi";
 
 const Page = async ({ params }: { params: { product: string } }) => {
-  const res = await fetch(`https://dummyjson.com/products/${params.product}`);
-  const product = await res.json();
 
-  console.log("product::", product);
+
+const id = params.product;
+
+  const response = await frontendApi.getOneProductById(id);
+  const resp2 = response.data.data.product
+  console.log(resp2)
+
 
   return (
     <div className="min-h-screen p-20">
       <SingleProduct
-        id={String(product.id)}
-        name={product.title}
-        description={product.description}
-        price={product.price}
-        image={product.thumbnail || product.images?.[0]}
-        isAvailable={product.stock > 0}
+        id={resp2[0]._id}
+        name={resp2[0].text}
+        description={resp2[0].description}
+        price={resp2[0].price}
+        image={resp2[0].image}
+        
         
       />
     </div>

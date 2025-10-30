@@ -7,10 +7,13 @@ import Hamburger from '@/app/_svg/Hamburger'
 import Close from '@/app/_svg/Close'
 import Icon from '@/app/_svg/Icon';
 import { useCart } from 'react-use-cart';
+import { authClient } from '@/lib/authClient';
 
 
 const Header = () => {
+  const {data:session}=authClient.useSession()
 
+  console.log(session)
   const[menu,setmenu]=useState(false)
   const {items}=useCart()
 
@@ -23,6 +26,8 @@ const Header = () => {
   if(!isClient){
     return null;
   }
+
+ 
   return (
     <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between   w-full content-center'>
       <Icon  className='size-9  hover:animate-bounce '/>
@@ -43,7 +48,9 @@ const Header = () => {
       <Link className='scale-120 ' href="/">Home</Link>
           <Link className='scale-120' href="/shop">shop</Link>
       <Link className='scale-120' href="/contact">contact</Link>
-      <Link className='scale-120' href="/login">login</Link>
+        
+     {!session ? <Link href="/login">Login</Link> : <button onClick={()=>authClient.signOut()} >Logout</button>}
+     
       
       <div className='flex gap-5 relative '>
        <Link href="/cart"> <Cart className="size-6 scale-120 "/> </Link> 
@@ -63,7 +70,8 @@ const Header = () => {
 
       <Link href="/contact">contact</Link>
 
-      <Link href="/login">login</Link>
+
+      {/* {!session.session?(<Link  href="/login">logi</Link>):(<Link  href="/logout">logout</Link>)} */}
 
       <div className='flex  absolute top-0 left-3 border-2 rounded-4xl p-2 '>
         <User className="size-4"/>

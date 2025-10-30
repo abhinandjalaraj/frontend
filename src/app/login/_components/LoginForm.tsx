@@ -1,22 +1,24 @@
 "use client";  
-import Cart from '@/app/_svg/Cart';
-import Cartt from '@/app/_svg/Cartt';
 // ✅ Marks this as a Client Component in Next.js (needed since we use hooks like useState, useForm here).
 
 import CloseEye from '@/app/_svg/CloseEye';  
 import Eye from '@/app/_svg/Eye';  
+import { authClient } from '@/lib/authClient';
 // ✅ Importing custom SVG icons for showing/hiding the password field.
 
 import { zodResolver } from '@hookform/resolvers/zod';  
 // ✅ Connects Zod validation schema with react-hook-form.
 
 import Link from 'next/link';  
+import { useRouter } from 'next/navigation';
+
 // ✅ Next.js Link component (used for navigation without reloading the page).
 
 import React, { useState } from 'react';  
 // ✅ Import React and the useState hook (used for password visibility toggle).
 
 import { useForm } from 'react-hook-form';  
+import toast from 'react-hot-toast';
 // ✅ Main hook from react-hook-form that manages form state, handles submission, and validation.)/////
 
 import z from 'zod'; // form validation element  
@@ -26,8 +28,8 @@ import z from 'zod'; // form validation element
 
 // ====================== VALIDATION SCHEMA ======================
 const loginSchema = z.object({
-  username: z.string().min(1,"please enter a username "),
-  // Rule: Username must not be empty (at least 1 character).
+  email: z.string().min(1,"please enter a email "),
+  // Rule: email must not be empty (at least 1 character).
   
   password: z.string().min(8,"minimum 8 characters reqired ")
   // Rule: Password must be at least 8 characters long.
@@ -61,11 +63,43 @@ const LoginForm = () => {
   // Default = false → password field is hidden (masked).
   // Toggle true/false to switch between masked and visible.
 
+  const [pending, setPending] = useState(false);
   
   // ✅ Submit function called after successful validation
-  const submit = (value: unknown) => {
+  const router=useRouter()
+  const submit =async (value: any) => {
+
+    const response = await authClient.signIn.email(
+          {
+           
+            email: value.email,
+            password: value.password,
+          },
+          {
+            onRequest: () => {
+              setPending(true);
+              
+            },
+            onSuccess: () => {
+              toast.success("signin successfull")
+              setPending(false)
+              router.push("/")
+              
+              
+
+            },
+            onError: (error) => {
+              // setPending(false);
+              toast.error("error signing in")
+              console.log("error::::", error);
+
+            },
+          }
+        );
+        console.log("response ",response)
+
     // "value" will contain form data as an object: { username: "...", password: "..." }
-    console.log("data::",value); 
+    // console.log("data::",value); 
     // Just logging the submitted data to console for debugging...
   };
 
@@ -95,17 +129,17 @@ const LoginForm = () => {
 
           {/* USERNAME INPUT */}
           <input
-            {...register("username")} // ✅ Register this input under the name "username"
+            {...register("email")} // ✅ Register this input under the name "email"
             className="w-80 h-11 rounded-2xl bg-white p-5"
             type="text"
-            placeholder="username"
+            placeholder="email"
           />
         </div>
 
-        {/* USERNAME ERROR MESSAGE */}
-        {errors.username && (
+        {/* email ERROR MESSAGE */}
+        {errors.email && (
           <p className='text-red-700 m-0 p-0'>
-            {errors.username.message}
+            {errors.email.message}
           </p>
         )}
 

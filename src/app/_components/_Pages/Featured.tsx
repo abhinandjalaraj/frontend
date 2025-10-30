@@ -13,64 +13,64 @@ import pic8 from "../../../../public/feaured01/furniture 1.jpg";
 
 import Card from "../Card";
 
-const Featured = () => {
+const Featured = ({featured}:any) => {
 
 
     
-  const featured = [
-    {
-      image:pic1,
-      ProductName: "Laptops",
-      ProductDescription:"laptops  for upto 30% off",
+  // const featured = [
+  //   {
+  //     image:pic1,
+  //     ProductName: "Laptops",
+  //     ProductDescription:"laptops  for upto 30% off",
       
-    },
-    {
-      image:pic2,
-      ProductName: "mobile phones",
-      ProductDescription:"mobile phones for upto 25%off ",
+  //   },
+  //   {
+  //     image:pic2,
+  //     ProductName: "mobile phones",
+  //     ProductDescription:"mobile phones for upto 25%off ",
       
-    },
-    {
-      image:pic3,
-      ProductName: "mens clothing",
-      ProductDescription:"upto 80% off on mens clothing",
+  //   },
+  //   {
+  //     image:pic3,
+  //     ProductName: "mens clothing",
+  //     ProductDescription:"upto 80% off on mens clothing",
       
-    },
-    {
-      image:pic4,
-      ProductName: "women clothing",
-      ProductDescription:"upto 30% off on womens clothing",
+  //   },
+  //   {
+  //     image:pic4,
+  //     ProductName: "women clothing",
+  //     ProductDescription:"upto 30% off on womens clothing",
       
-    },
-    {
-      image:pic5,
-      ProductName: "kids shopping",
-      ProductDescription:"kids clothing 10%off",
+  //   },
+  //   {
+  //     image:pic5,
+  //     ProductName: "kids shopping",
+  //     ProductDescription:"kids clothing 10%off",
       
-    },
+  // //   },
 
-    {
-      image:pic6,
-      ProductName: " electronics",
-      ProductDescription:"30% off on electronics",
+  //   {
+  //     image:pic6,
+  //     ProductName: " electronics",
+  //     ProductDescription:"30% off on electronics",
      
-    },
-    {
-      image:pic7,
-      ProductName: "home furniture",
-      ProductDescription:"wooden furnitures  for 70% off",
-    },
-    {
-      image:pic8,
-      ProductName: "home decor",
-      ProductDescription:"bedroom decorations for 30% off",
-    },
+  //   },
+  //   {
+  //     image:pic7,
+  //     ProductName: "home furniture",
+  //     ProductDescription:"wooden furnitures  for 70% off",
+  //   },
+  //   {
+  //     image:pic8,
+  //     ProductName: "home decor",
+  //     ProductDescription:"bedroom decorations for 30% off",
+  //   },
 
     
     
 
     
-  ];
+  // ];
   return (
 
     <div className="bg-gray-900 max-md:pt-5 min-md:p-8  ">
@@ -80,11 +80,13 @@ const Featured = () => {
       {featured.map((item,index)=>(
        
           <Card
+         
           key={index}
+          id={item._id}
           image={item.image}
-           ProductName={item. ProductName}
-           ProductDescription={item.ProductDescription}
-           price={""}
+           ProductName={item.text}
+           ProductDescription={item.Description}
+           price={item.price}
   
           
           />

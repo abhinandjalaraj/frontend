@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from 'react-use-cart';
 import { useEffect, useState } from 'react';
 import image1 from "../../../public/Images/confusing-woman-due-to-empty-cart-4558760-3780056.webp"
+import { storageurl } from '@/utils/BaseUrl';
 
 const Page = () => {
   
@@ -64,7 +65,7 @@ if(!isClient){
              
                  <tr >
                 <td>
-               <div className='relative  size-20'> <Image fill className='absolute object-cover' src={item.image} alt='' /></div>
+               <div className='relative  size-20'> <Image fill className='absolute object-cover' src={storageurl+ item.image} alt='' /></div>
                 </td>
         
                  <td>
