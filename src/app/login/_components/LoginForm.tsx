@@ -1,7 +1,6 @@
 "use client";  
 // ✅ Marks this as a Client Component in Next.js (needed since we use hooks like useState, useForm here).
-
-import CloseEye from '@/app/_svg/CloseEye';  
+ import CloseEye from '@/app/_svg/CloseEye';  
 import Eye from '@/app/_svg/Eye';  
 import { authClient } from '@/lib/authClient';
 // ✅ Importing custom SVG icons for showing/hiding the password field.
@@ -69,7 +68,7 @@ const LoginForm = () => {
   const router=useRouter()
   const submit =async (value: any) => {
 
-    const response = await authClient.signIn.email(
+    const response = await authClient.signIn.email(//better auth provides and generates a  user id while loggng in
           {
            
             email: value.email,
@@ -84,9 +83,6 @@ const LoginForm = () => {
               toast.success("signin successfull")
               setPending(false)
               router.push("/")
-              
-              
-
             },
             onError: (error) => {
               // setPending(false);
@@ -96,7 +92,11 @@ const LoginForm = () => {
             },
           }
         );
-        console.log("response ",response)
+        if(response.data?.user.id){
+          window.localStorage.setItem("userId",response.data.user.id)
+           console.log("userIdddd::",response.data.user.id)
+
+        }
 
     // "value" will contain form data as an object: { username: "...", password: "..." }
     // console.log("data::",value); 

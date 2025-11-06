@@ -6,11 +6,7 @@ import image3 from "../../..//public/catagories/menn.jpg";
 import Image from "next/image";
 import { storageurl } from "@/utils/BaseUrl";
 
-const Carousal = ({data}:any 
-
-
-
-) => {
+const Carousal = ({data}:any) => {
   const carousal=data
   // console.log("this is data carousal",data.carousal)
   // usestate id called and initial value is set to 0 to count

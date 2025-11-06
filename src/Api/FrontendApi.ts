@@ -13,4 +13,5 @@ export const frontendApi = {
   getOneProductById: async (id:string) => {
     return await axiosConfig.get(`/shop/get-one/${id}`);
   },
+ 
 };

@@ -1,6 +1,8 @@
 "use client";
 
+import { OrderApi } from "@/Api/Config/OrderApi";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -15,12 +17,17 @@ const Page = () => {
     lastname: z.string().min(1, "Enter last name"),
     phnumber: z.string().min(10, "Enter minimum 10 numbers"),
     email: z.string().email("Enter valid email"),
-    adress: z.string().min(10, "Enter a valid address"),
+    address: z.string().min(10, "Enter a valid address"),
     zipcode: z.string().min(6, "Enter minimum 6 digits"),
-    country: z.refine((value) => value !== "country", "Please select a country"),
+    country: z.refine(
+      (value) => value !== "country",
+      "Please select a country"
+    ),
   });
 
   type TLoginSchema = z.infer<typeof loginSchema>;
+
+  const router =useRouter()
 
   const {
     register,
@@ -28,8 +35,23 @@ const Page = () => {
     formState: { errors, isSubmitting },
   } = useForm<TLoginSchema>({ resolver: zodResolver(loginSchema) });
 
-  const data = (value: unknown) => {
-    toast.success("order placed")
+  const submit = async (shippingDetails: unknown) => {
+    toast.success("order placed");
+
+    const cartItems = items.map((item) => {
+      return {
+        quantity: item.quantity,
+        productId: item.id,
+      };
+    });
+
+    const userId = window.localStorage.getItem("userId");
+    const allData = { userId, shippingDetails, cartItems };
+    const response = await OrderApi.PlaceOrder(allData);
+    console.log("response", response);
+
+router.push(`/payment/?orderId=${response.data.data.orderID}`)
+    
   };
 
   return (
@@ -41,7 +63,7 @@ const Page = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* --- Form Section --- */}
         <form
-          onSubmit={handleSubmit(data)}
+          onSubmit={handleSubmit(submit)}
           className="col-span-2 flex flex-col gap-4 bg-white p-6 rounded-2xl shadow-md"
         >
           {/* Firstname / Lastname */}
@@ -54,7 +76,9 @@ const Page = () => {
                 placeholder="First name"
               />
               {errors.firstname && (
-                <p className="text-red-600 text-sm mt-1">{errors.firstname.message}</p>
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.firstname.message}
+                </p>
               )}
             </div>
 
@@ -66,7 +90,9 @@ const Page = () => {
                 placeholder="Last name"
               />
               {errors.lastname && (
-                <p className="text-red-600 text-sm mt-1">{errors.lastname.message}</p>
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.lastname.message}
+                </p>
               )}
             </div>
           </div>
@@ -80,7 +106,9 @@ const Page = () => {
               placeholder="Phone number"
             />
             {errors.phnumber && (
-              <p className="text-red-600 text-sm mt-1">{errors.phnumber.message}</p>
+              <p className="text-red-600 text-sm mt-1">
+                {errors.phnumber.message}
+              </p>
             )}
           </div>
 
@@ -93,20 +121,24 @@ const Page = () => {
               placeholder="Email address"
             />
             {errors.email && (
-              <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
+              <p className="text-red-600 text-sm mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
           {/* Address */}
           <div>
             <input
-              {...register("adress")}
+              {...register("address")}
               className="w-full border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-800"
               type="text"
               placeholder="Address"
             />
-            {errors.adress && (
-              <p className="text-red-600 text-sm mt-1">{errors.adress.message}</p>
+            {errors.address && (
+              <p className="text-red-600 text-sm mt-1">
+                {errors.address.message}
+              </p>
             )}
           </div>
 
@@ -119,7 +151,9 @@ const Page = () => {
               placeholder="Zip code"
             />
             {errors.zipcode && (
-              <p className="text-red-600 text-sm mt-1">{errors.zipcode.message}</p>
+              <p className="text-red-600 text-sm mt-1">
+                {errors.zipcode.message}
+              </p>
             )}
           </div>
 
@@ -137,7 +171,9 @@ const Page = () => {
               <option value="japan">Japan</option>
             </select>
             {errors.country && (
-              <p className="text-red-600 text-sm mt-1">{errors.country.message}</p>
+              <p className="text-red-600 text-sm mt-1">
+                {errors.country.message}
+              </p>
             )}
           </div>
 
