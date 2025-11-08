@@ -8,7 +8,7 @@ type props = {
   id: string;
   ProductName: string;
   ProductDescription: string;
-  price: number;
+  price: string;
   
   
 };
