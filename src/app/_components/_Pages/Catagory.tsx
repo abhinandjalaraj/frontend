@@ -31,7 +31,7 @@ const Catagory = ({ category }: THomeCategory) => {
         <div className=" relative row-span-2  col-span-1 h-[400px]">
           <Image
             className="object-cover"
-            src={storageurl + category[0]?.image}
+            src={storageurl + category[1]?.image}
             alt=""
             fill
           />

@@ -73,12 +73,12 @@ const Carousal = ({data}:any) => {
         </button>
         {/* right button */}
       </div>
-      {/* dynamically adjusted   text  */}
-      <div className="absolute flex flex-col h-full w-full justify-center items-center font-serif font-bold">
+      {/* <div className="absolute flex flex-col h-full w-full justify-center items-center font-serif font-bold">
         <h1 className="text-5xl font-bold  ">{carousal[index].text} </h1>
         <h4 className="text-1xl font-bold pt-3 ">{carousal[index].description}</h4>
         
-      </div>
+      </div> */}
+     
     </div>
   );
 };
