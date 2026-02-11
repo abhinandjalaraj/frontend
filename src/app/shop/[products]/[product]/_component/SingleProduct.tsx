@@ -13,15 +13,24 @@ type Props = {
   image: string 
 };
 
+ export type Tvalue={
+  
+id:string,
+name:string
+description:string
+price:number
+image:string
+
+}
 const SingleProduct = ({ id, name, description, price, image }: Props) => {
   // console.log("name:::",name)
-  const value = { id, name, description, price,  image };
+  const value = { id, name, description, price,  image } as Tvalue
   const { addItem } = useCart();
-  const addToCart =(value)=>{
+  const addToCart =(value:Tvalue)=>{
     addItem(value)
     toast.success("added to cart")//toast component should be called in layot page beforen using it 
 
-  }
+  } 
 
   return (
     <div className="grid p-20 shadow-xl/25 grid-cols-3 justify-center items-center max-md:grid-cols-1 min-sm:gap-5 max-lg:grid-cols-1 min-lg:gap-20 bg-white">

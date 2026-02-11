@@ -3,7 +3,6 @@
 
 import CloseEye from "@/app/_svg/CloseEye";
 import Eye from "@/app/_svg/Eye";
-import { authClient } from "@/lib/authClient";
 // ✅ Importing custom SVG components (icons) to toggle show/hide password.
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -72,30 +71,8 @@ const SignupForm = () => {
   const [pending, setPending] = useState(false);
   const submit = async (value: any) => {
 
-    // console.log("value:::",value)
-    const response = await authClient.signUp.email(
-      {
-        name: value.username,
-        email: value.email,
-        password: value.password,
-      },
-      {
-        onRequest: () => {
-          // setPending(true);
-        },
-        onSuccess: () => {
-         toast.success("sign-up successfull")
-        },
-        onError: (error) => {
-          // setPending(false);
-        toast.success("Failed TO Signin")
-          console.log("error::::", error);
-        },
-      }
-    );
+   
 
-    // console.log("res:::",response)
-    // Logs form values in console (username, email, password, confirmpassword)
   };
 
   return (
