@@ -7,13 +7,10 @@ import Hamburger from '@/app/_svg/Hamburger'
 import Close from '@/app/_svg/Close'
 import Icon from '@/app/_svg/Icon';
 import { useCart } from 'react-use-cart';
-import { authClient } from '@/lib/authClient';
 
 
 const Header = () => {
-  const {data:session}=authClient.useSession()
 
-  console.log(session)
   const[menu,setmenu]=useState(false)
   const {items}=useCart()
 
@@ -29,27 +26,20 @@ const Header = () => {
 
  
   return (
-    <div  className='font-bold text-white bg-gray-900 p-5 flex justify-between   w-full content-center'>
-      <Icon  className='size-9  hover:animate-bounce '/>
-    <div className="flex items-center justify-center  bg-gray-100 rounded-2xl max-md:h-">
-      <div className="flex items-center rounded-2xl w-full h-full ">
-        <input 
-          type="text" 
-          placeholder="Search..." 
-          className=" w-80 h-full rounded-2xl max-md:px-2 max-md:w-50 pl-3  max-md:rounded-2xl  text-gray-700 rounded-l-2xl   focus:ring-blue-500"
-        />
-      </div>
+    <div  className='font-bold text-white  p-5 absolute top-0  z-100 flex justify-between   w-full content-center'>
+      <Icon  className='size-9   hover:animate-bounce '/>
+    <div className="flex items-center justify-between   bg-gray-100 rounded-2xl">
+      
     </div>
   
 
 
 
-<div className='flex gap-5 justify-between  content-center text-1x9 max-md:hidden'>
+<div className='flex gap-10 justify-between  content-center text-1x9 max-md:hidden'>
       <Link className='scale-120 ' href="/">Home</Link>
           <Link className='scale-120' href="/shop">shop</Link>
       <Link className='scale-120' href="/contact">contact</Link>
         
-     {!session ? <Link href="/login">Login</Link> : <button onClick={()=>authClient.signOut()} >Logout</button>}
      
       
       <div className='flex gap-5 relative '>

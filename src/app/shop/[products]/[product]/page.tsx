@@ -13,7 +13,7 @@ const id = params.product;
 
 
   return (
-    <div className="min-h-screen p-20">
+    <div className=" ">
       <SingleProduct
         id={resp2[0]._id}
         name={resp2[0].text}

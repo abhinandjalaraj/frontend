@@ -18,7 +18,7 @@ export default async function Home() {
 
   // console.log("this is get category",response)
   return (
-    <div  >
+    <div>
     <Carousal data={response.carousal} />
     <Catagory category={response.category} />
     <Featured featured={response.featured}/>

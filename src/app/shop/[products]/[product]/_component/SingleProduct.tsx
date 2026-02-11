@@ -29,15 +29,14 @@ const SingleProduct = ({ id, name, description, price, image }: Props) => {
         <Image alt="" src={storageurl+image} className="object-cover rounded-2xl" fill />
       </div>
       <div className="flex flex-col col-span-2 p-5 gap-3">
-        <h2 className="text-3xl font-bold">{name}</h2>
+        <h2 className="text-3xl font-bold font-sans">{name}</h2>
         <h4 className="font-extrabold">
-          Price: <span className="text-gray-700">${price}</span> | Availability:{" "}
+           <span className="text-gray-700 text-2xl  font-mono">${price}</span><span className=" font-mono pl-3 text-[14px] text-green-400">in stock ✅</span>
         </h4>
-        <h4 className="font-extrabold">Description</h4>
         <p className="text-gray-700">{description}</p>
         <button
           onClick={() => addToCart(value)}
-          className="bg-black text-white p-2 rounded-2xl hover:bg-gray-800 transition"
+          className="bg-black w-50 text-white p-2 mt-2 rounded-4xl hover:bg-gray-800 transition"
         >
           Add to Cart
         </button>
