@@ -1,27 +1,26 @@
-import React from "react";
-import SingleProduct from "./_component/SingleProduct";
 import { frontendApi } from "@/Api/FrontendApi";
+import SingleProduct from "./_component/SingleProduct";
 
-const Page = async ({ params }: { params: { product: string } }) => {
+type PageProps = {
+  params: Promise<{
+    product: string;
+  }>;
+};
 
+const Page = async ({ params }: PageProps) => {
+  const { product } = await params;
 
-const id = params.product;
-
-  const response = await frontendApi.getOneProductById(id);
-  const resp2 = response.data.data.product
-  console.log(resp2)
-
+  const response = await frontendApi.getOneProductById(product);
+  const resp2 = response.data.data.product;
 
   return (
-    <div className=" ">
+    <div>
       <SingleProduct
         id={resp2[0]._id}
         name={resp2[0].text}
         description={resp2[0].description}
         price={resp2[0].price}
         image={resp2[0].image}
-        
-        
       />
     </div>
   );

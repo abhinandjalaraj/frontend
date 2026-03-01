@@ -14,9 +14,7 @@ import Featured from "./_components/_Pages/Featured";
 export default async function Home() {
 
   const response =  await getHome()
-// console.log(response.category)
 
-  // console.log("this is get category",response)
   return (
     <div>
     <Carousal data={response.carousal} />

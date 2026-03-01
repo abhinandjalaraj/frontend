@@ -65,7 +65,7 @@ const LoginForm = () => {
   
   // ✅ Submit function called after successful validation
   const router=useRouter()
-  const submit =async (value: any) => {
+  const submit =async (value: TLoginSchema) => {
 
   };
 

@@ -1,78 +1,95 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+"use client";
+
+import React, { useState, FormEvent } from "react";
 import {
   PaymentElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
+import type { StripePaymentElementOptions } from "@stripe/stripe-js";
 
-export default function PaymentForm({dpmCheckerLink}: any) {
+type PaymentFormProps = {
+  dpmCheckerLink?: string;
+};
+
+export default function PaymentForm({ dpmCheckerLink }: PaymentFormProps) {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [message, setMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [message, setMessage] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return;
-    }
+    if (!stripe || !elements) return;
 
     setIsLoading(true);
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/payment-status",
       },
     });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your return_url. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the return_url.
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message as any);
-    } else {
-      setMessage("An unexpected error occurred." as any);
+    if (error) {
+      if (error.type === "card_error" || error.type === "validation_error") {
+        setMessage(error.message ?? "Payment failed.");
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
     }
 
     setIsLoading(false);
   };
 
-  const paymentElementOptions = {
+  // ✅ Correctly typed Stripe options
+  const paymentElementOptions: StripePaymentElementOptions = {
     layout: "accordion",
   };
 
   return (
-    <>
-      <div className="h-[70vh]">
-        <form id="payment-form" className="overflow-hidden" onSubmit={handleSubmit}>
-  
-          <PaymentElement id="payment-element" options={paymentElementOptions} />
-          <button disabled={isLoading || !stripe || !elements} id="submit">
-            <span id="button-text">
-              {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-            </span>
-          </button>
-          {/* Show any error or success messages */}
-          {message && <div id="payment-message">{message}</div>}
-          </form>
-          {/* [DEV]: For demo purposes only, display dynamic payment methods annotation and integration checker */}
-          <div id="dpm-annotation">
+    <div className="h-[70vh]">
+      <form
+        id="payment-form"
+        className="overflow-hidden"
+        onSubmit={handleSubmit}
+      >
+        <PaymentElement
+          id="payment-element"
+          options={paymentElementOptions}
+        />
+
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner" />
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+
+      {dpmCheckerLink && (
+        <div id="dpm-annotation">
           <p>
-            Payment methods are dynamically displayed based on customer location, order amount, and currency.&nbsp;
-            <a href={dpmCheckerLink} target="_blank" rel="noopener noreferrer" id="dpm-integration-checker">Preview payment methods by transaction</a>
+            Payment methods are dynamically displayed based on customer
+            location, order amount, and currency.{" "}
+            <a
+              href={dpmCheckerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="dpm-integration-checker"
+            >
+              Preview payment methods by transaction
+            </a>
           </p>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }

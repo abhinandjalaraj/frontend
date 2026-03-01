@@ -69,7 +69,7 @@ const SignupForm = () => {
   // ✅ Function triggered when form is successfully submitted
 
   const [pending, setPending] = useState(false);
-  const submit = async (value: any) => {
+  const submit = async (value: TLoginSchema) => {
 
    
 
