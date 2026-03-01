@@ -29,7 +29,7 @@ export default function PaymentForm({ dpmCheckerLink }: PaymentFormProps) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/payment-status",
+        return_url: "https://firstecommercebackend.onrender.compayment-status",
       },
     });
 
