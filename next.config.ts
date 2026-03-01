@@ -10,8 +10,11 @@ images: {
       pathname:'**',
     },
   ],
-},
-
+   
+    domains: ["firstecommercebackend.onrender.com"],
+  },
 };
+
+
 
 export default nextConfig;
